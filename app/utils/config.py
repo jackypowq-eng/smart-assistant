@@ -10,23 +10,17 @@ class Config:
     APP_NAME = os.getenv("APP_NAME", "Smart Assistant")
     APP_VERSION = os.getenv("APP_VERSION", "1.0.0")
     
-    # 模型配置 - 阿里云百炼模型名（不是端点ID）
-    MODEL_NAME = os.getenv("MODEL_NAME", "qwen-turbo")
+    # 阿里云模型配置
+    ALIYUN_MODEL_NAME = os.getenv("ALIYUN_MODEL_NAME", "qwen3-max")
+    ALIYUN_API_KEY = os.getenv("ALIYUN_API_KEY")
+    ALIYUN_BASE_URL = os.getenv("ALIYUN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1")
     
-    # API Keys - 注意大小写一致
-    ALIYUN_API_KEY = os.getenv("ALIYUN_API_KEY")  # 修正：全大写
+    # Ollama 本地模型配置
+    OLLAMA_MODEL_NAME = os.getenv("OLLAMA_MODEL_NAME", "qwen3.5:4b")
+    OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
     
-    # 阿里云百炼 base_url
-    BASE_URL = os.getenv("BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1")
-    
-    # 模型选择逻辑
-    @staticmethod
-    def get_model_provider():
-        """根据环境变量选择模型提供商"""
-        if Config.ALIYUN_API_KEY:
-            return "aliyun"
-        else:
-            raise ValueError("No Aliyun API key provided")
+    # 默认模型提供商
+    DEFAULT_PROVIDER = os.getenv("DEFAULT_PROVIDER", "aliyun")
 
 
 config = Config()
